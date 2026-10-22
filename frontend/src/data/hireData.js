@@ -1069,6 +1069,9 @@ class Store {
     this.set((x) => {
       x.route = { name, ...params };
     });
+    if (typeof this._onGo === 'function') {
+      try { this._onGo(name, params); } catch (e) { /* ignore navigation error */ }
+    }
   }
 
   toast(text, kind = 'ok') {
